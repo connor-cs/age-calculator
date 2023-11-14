@@ -50,6 +50,9 @@ body {
   padding: 2em;
 }
 
+.invalid {
+  color: hsl(0, 100%, 67%);
+}
 .input {
   display: flex;
   flex-direction: column;
@@ -58,22 +61,37 @@ body {
   
 }
 
-.input > * {
-  max-width: fit-content;
+
+.input > p {
+  color: hsl(0, 100%, 67%);
+  font-family: Poppins-Italic;
+  margin: 0;
+  margin-left: 1rem;
 }
 
 .input>input {
   padding: 1rem;
   border-radius: 5px;
+  border: 1px solid hsl(0, 0%, 86%);
   margin: 1rem;
   font-size: 32px;
   max-width: 30%;
 }
 
+.input>input.invalid {
+  border-color:  hsl(0, 100%, 67%);
+}
+
 .input>label {
   margin-left: 1rem;
   font-family: Poppins-Bold;
+  letter-spacing: 0.2rem;
   color: hsl(0, 1%, 44%);
+}
+.input>label.invalid {
+  margin-left: 1rem;
+  font-family: Poppins-Bold;
+  color:  hsl(0, 100%, 67%);
 }
 
 .input-section {

@@ -1,44 +1,44 @@
-import { useState } from "react";
-
-const Input = () => {
-  const [isValid, setIsValid] = useState(true);
-  const [values, setValues] = useState({
-    day: "",
-    month: "",
-    year: "",
-  });
-
-  console.table(values);
-  const validate = () => {};
-
+const Input = ({ isValid, setInput, input, errors }) => {
   return (
     <div className="input-section">
       <div className="input">
-        <label htmlFor="day">DAY</label>
+        <label htmlFor="day" className={errors.dayError ? "invalid" : null}>
+          DAY
+        </label>
         <input
           name="day"
           type="number"
           required
           placeholder="DD"
           onChange={(e) =>
-            setValues({ ...values, [e.target.name]: e.target.value })
+            setInput({ ...input, [e.target.name]: e.target.value })
           }
+          className={errors.dayError ? "invalid" : null}
         />
+        {errors.dayError ? <p>Must be a valid day</p> : null}
       </div>
       <div className="input">
-        <label htmlFor="month">MONTH</label>
+        <label htmlFor="month" className={errors.monthError ? "invalid" : null}>
+          MONTH
+        </label>
         <input
           name="month"
           type="number"
           required
           placeholder="MM"
           onChange={(e) =>
-            setValues({ ...values, [e.target.name]: e.target.value })
+            setInput({ ...input, [e.target.name]: e.target.value })
           }
+          className={errors.monthError ? "invalid" : null}
         />
+        {errors.monthError ? <p>Must be a valid month</p> : null}
       </div>
       <div className="input">
-        <label htmlFor="year" required>
+        <label
+          htmlFor="year"
+          className={errors.yearError ? "invalid" : null}
+          required
+        >
           YEAR
         </label>
         <input
@@ -47,9 +47,11 @@ const Input = () => {
           required
           placeholder="YYYY"
           onChange={(e) =>
-            setValues({ ...values, [e.target.name]: e.target.value })
+            setInput({ ...input, [e.target.name]: e.target.value })
           }
+          className={errors.yearError ? "invalid" : null}
         />
+        {errors.yearError && <p>Must be in the past</p>}
       </div>
     </div>
   );
