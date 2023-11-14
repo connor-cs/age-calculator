@@ -11,9 +11,9 @@ function App() {
         <hr></hr>
         <div className="display-section">
           <ul>
-            <li>12 years</li>
-            <li>11 months</li>
-            <li>10 days</li>
+            <li><span>--</span> years</li>
+            <li><span>--</span> months</li>
+            <li><span>--</span> days</li>
           </ul>
         </div>
       </div>
