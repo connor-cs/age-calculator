@@ -8,9 +8,9 @@ function App() {
   const [isValid, setIsValid] = useState(true);
   //user input
   const [input, setInput] = useState({
-    day: "1",
-    month: "7",
-    year: "2023",
+    day: "16",
+    month: "6",
+    year: "1992",
   });
   //results to be displayed after calculation
   const [results, setResults] = useState({
@@ -67,6 +67,11 @@ function App() {
   
   const submit = () => {
     validate()
+    const userBirthDate = moment([input.year, (+input.month - 1), input.day])
+    const now = moment()
+
+    console.log(userBirthDate.duration(now, 'years', 'months', 'days'))
+    
     if (errors.dayError === false && errors.yearError=== false && errors.monthError===false) {
       console.log('klkjlk')
     }
