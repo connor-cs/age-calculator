@@ -36,6 +36,15 @@
   src: url(/assets/fonts/Poppins-ExtraBoldItalic.ttf);
 }
 
+.arrow {
+  background-color: hsl(259, 100%, 65%);
+  border-radius: 100px;
+  padding: 15px;
+  position: absolute;
+  left: 90%;
+  top: -10%;
+  cursor: pointer;
+}
 
 body {
   background-color: #f0f0f0;
@@ -50,19 +59,23 @@ body {
   padding: 2em;
 }
 
+.display-section {
+  position: relative;
+}
+
 .invalid {
   color: hsl(0, 100%, 67%);
 }
+
 .input {
   display: flex;
   flex-direction: column;
   text-align: left;
   max-width: fit-content
-  
 }
 
 
-.input > p {
+.input>p {
   color: hsl(0, 100%, 67%);
   font-family: Poppins-Italic;
   margin: 0;
@@ -79,7 +92,7 @@ body {
 }
 
 .input>input.invalid {
-  border-color:  hsl(0, 100%, 67%);
+  border-color: hsl(0, 100%, 67%);
 }
 
 .input>label {
@@ -88,10 +101,11 @@ body {
   letter-spacing: 0.2rem;
   color: hsl(0, 1%, 44%);
 }
+
 .input>label.invalid {
   margin-left: 1rem;
   font-family: Poppins-Bold;
-  color:  hsl(0, 100%, 67%);
+  color: hsl(0, 100%, 67%);
 }
 
 .input-section {
