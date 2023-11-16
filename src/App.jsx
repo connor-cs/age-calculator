@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
+import dayjs from "dayjs";
 import Input from "./Input";
+
 
 import "./App.css";
 
@@ -8,9 +10,9 @@ function App() {
   const [isValid, setIsValid] = useState(true);
   //user input
   const [input, setInput] = useState({
-    day: "16",
-    month: "6",
     year: "1992",
+    month: "6",
+    day: "50",
   });
   //results to be displayed after calculation
   const [results, setResults] = useState({
@@ -46,6 +48,8 @@ function App() {
 
   //is user input valid?
   const validate = () => {
+    
+
     const daysInMonth = moment(currentDate.month).daysInMonth();
     if (parseInt(currentDate.year) < parseInt(input.year)) {
       setIsValid(false);
@@ -67,13 +71,27 @@ function App() {
   
   const submit = () => {
     validate()
-    const userBirthDate = moment([input.year, (+input.month - 1), input.day])
-    const now = moment()
-
-    console.log(userBirthDate.duration(now, 'years', 'months', 'days'))
+    const userBirthDateUTCString = moment([input.year, (+input.month - 1), input.day]).utc()['_d'].toString()
+    const now = moment().utc()['_d'].toString()
+    const diff = moment.duration(now.diff(userBirthDateUTCString))
+   const birthDate = new Date(userBirthDateUTCString).toUTCString()
+   
+   console.log('diff',diff)
+   console.log(birthDate)
+   
+    // const userBirthDate = dayjs({year :+input.year, month :+input.month, day :+input.day})
+    // console.log(userBirthDateUTCString.toString())
+    // const now = dayjs()
+    // console.log(now)
+    // console.log(userBirthDate.isValid())
+    // console.log(moment.duration().days())
+    // console.log(now.diff(userBirthDate))
+    // console.log(userBirthDate.duration('d'))
+    // console.log(now.duration(3,'days'))
+    // console.log(userBirthDate.duration(now, 'years', 'months', 'days'))
     
     if (errors.dayError === false && errors.yearError=== false && errors.monthError===false) {
-      console.log('klkjlk')
+      console.log('')
     }
   };
 
