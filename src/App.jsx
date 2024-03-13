@@ -29,6 +29,7 @@ function App() {
     monthError: false,
     yearError: false,
   });
+  const isValidNumber = (value) => !isNaN(parseInt(value, 10));
 
   //get today's info on load
   useEffect(() => {
@@ -43,12 +44,24 @@ function App() {
     });
     // console.log('test',moment(currentMonth).daysInMonth())
   }, []);
-  
+
   useEffect(() => {
-    if (input.year !== '' && input.month !== '' && input.day !== '') {
+    if (isValidNumber(input.year)) {
       validate();
     }
-  }, [input]);
+  }, [input.year]);
+  
+  useEffect(() => {
+    if (isValidNumber(input.month)) {
+      validate();
+    }
+  }, [input.month]);
+
+  useEffect(() => {
+    if (isValidNumber(input.day)) {
+      validate();
+    }
+  }, [input.day]);
 
   //is user input valid?
   const validate = () => {
@@ -56,7 +69,7 @@ function App() {
 
     if (parseInt(currentDate.year) < parseInt(input.year)) {
       setIsValid(false);
-      setErrors({ ...errors, yearError: true });
+      setErrors((prevErrors) => ({ ...prevErrors, yearError: true }));
       console.log("invalid year");
     }
 
@@ -66,13 +79,13 @@ function App() {
       parseInt(input.month, 10) < 1
     ) {
       setIsValid(false);
-      setErrors({ ...errors, monthError: true });
+      setErrors((prevErrors) => ({ ...prevErrors, monthError: true }));
       console.log("invalid month");
     }
 
     if (!(+input.day >= 1) || !(+input.day <= daysInMonth)) {
       setIsValid(false);
-      setErrors({ ...errors, dayError: true });
+      setErrors((prevErrors) => ({ ...prevErrors, dayError: true }));
       console.log("invalid day");
     } else {
       setIsValid(true);
@@ -100,9 +113,11 @@ function App() {
     });
   };
 
+  console.log("Errors:", errors);
   return (
     <>
       <div className="main">
+      
         <Input
           isValid={isValid}
           setInput={setInput}
