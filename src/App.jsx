@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
-import dayjs from "dayjs";
 import Input from "./Input";
-
 
 import "./App.css";
 
@@ -48,51 +46,45 @@ function App() {
 
   //is user input valid?
   const validate = () => {
-    
-
     const daysInMonth = moment(currentDate.month).daysInMonth();
     if (parseInt(currentDate.year) < parseInt(input.year)) {
       setIsValid(false);
       setErrors({ ...errors, yearError: true });
-      console.log('bad year')
+      console.log("bad year");
     }
     if (+input.month > 12 || +input.month < 1) {
       setIsValid(false);
       setErrors({ ...errors, monthError: true });
-      console.log('bad month')
+      console.log("bad month");
     }
     if (!(+input.day >= 1) || !(+input.day <= daysInMonth)) {
-      setIsValid(false)
-      setErrors({...errors, dayError: true})
-    } else console.log('okay');
+      setIsValid(false);
+      setErrors({ ...errors, dayError: true });
+    } else console.log("okay");
   };
 
- 
-  
   const submit = () => {
-    validate()
-    const userBirthDateUTCString = moment([input.year, (+input.month - 1), input.day]).utc()['_d'].toString()
-    const now = moment().utc()['_d'].toString()
-    const diff = moment.duration(now.diff(userBirthDateUTCString))
-   const birthDate = new Date(userBirthDateUTCString).toUTCString()
-   
-   console.log('diff',diff)
-   console.log(birthDate)
-   
-    // const userBirthDate = dayjs({year :+input.year, month :+input.month, day :+input.day})
-    // console.log(userBirthDateUTCString.toString())
-    // const now = dayjs()
-    // console.log(now)
-    // console.log(userBirthDate.isValid())
-    // console.log(moment.duration().days())
-    // console.log(now.diff(userBirthDate))
-    // console.log(userBirthDate.duration('d'))
-    // console.log(now.duration(3,'days'))
-    // console.log(userBirthDate.duration(now, 'years', 'months', 'days'))
-    
-    if (errors.dayError === false && errors.yearError=== false && errors.monthError===false) {
-      console.log('')
+    validate();
+    const userBirthDate = moment([input.year, +input.month - 1, input.day]);
+    const now = moment();
+    const diff = moment.duration(now.diff(userBirthDate));
+
+    const years = diff.years();
+    const months = diff.months();
+    const days = diff.days();
+
+    if (
+      errors.dayError === false &&
+      errors.yearError === false &&
+      errors.monthError === false
+    ) {
+      console.log("err");
     }
+    setResults({
+      years: years.toString(),
+      months: months.toString(),
+      days: days.toString(),
+    });
   };
 
   return (
@@ -115,13 +107,13 @@ function App() {
           />
           <ul>
             <li>
-              <span>--</span> years
+              <span>{results.years.length > 0 ? results.years : '--'}</span> years
             </li>
             <li>
-              <span>--</span> months
+              <span>{results.months.length > 0 ? results.months : '--'}</span> months
             </li>
             <li>
-              <span>--</span> days
+              <span>{results.days.length> 0 ? results.days : '--'}</span> days
             </li>
           </ul>
         </div>
