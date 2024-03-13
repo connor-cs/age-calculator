@@ -8,9 +8,9 @@ function App() {
   const [isValid, setIsValid] = useState(true);
   //user input
   const [input, setInput] = useState({
-    year: "1992",
-    month: "6",
-    day: "50",
+    year: "",
+    month: "",
+    day: "",
   });
   //results to be displayed after calculation
   const [results, setResults] = useState({
@@ -43,28 +43,48 @@ function App() {
     });
     // console.log('test',moment(currentMonth).daysInMonth())
   }, []);
+  
+  useEffect(() => {
+    if (input.year !== '' && input.month !== '' && input.day !== '') {
+      validate();
+    }
+  }, [input]);
 
   //is user input valid?
   const validate = () => {
     const daysInMonth = moment(currentDate.month).daysInMonth();
+
     if (parseInt(currentDate.year) < parseInt(input.year)) {
       setIsValid(false);
       setErrors({ ...errors, yearError: true });
-      console.log("bad year");
+      console.log("invalid year");
     }
-    if (+input.month > 12 || +input.month < 1) {
+
+    if (
+      isNaN(parseInt(input.month, 10)) ||
+      parseInt(input.month, 10) > 12 ||
+      parseInt(input.month, 10) < 1
+    ) {
       setIsValid(false);
       setErrors({ ...errors, monthError: true });
-      console.log("bad month");
+      console.log("invalid month");
     }
+
     if (!(+input.day >= 1) || !(+input.day <= daysInMonth)) {
       setIsValid(false);
       setErrors({ ...errors, dayError: true });
-    } else console.log("okay");
+      console.log("invalid day");
+    } else {
+      setIsValid(true);
+      setErrors({ dayError: false, monthError: false, yearError: false });
+    }
   };
 
   const submit = () => {
     validate();
+    if (errors.dayError || errors.yearError || errors.monthError) {
+      return;
+    }
     const userBirthDate = moment([input.year, +input.month - 1, input.day]);
     const now = moment();
     const diff = moment.duration(now.diff(userBirthDate));
@@ -73,13 +93,6 @@ function App() {
     const months = diff.months();
     const days = diff.days();
 
-    if (
-      errors.dayError === false &&
-      errors.yearError === false &&
-      errors.monthError === false
-    ) {
-      console.log("err");
-    }
     setResults({
       years: years.toString(),
       months: months.toString(),
@@ -107,13 +120,15 @@ function App() {
           />
           <ul>
             <li>
-              <span>{results.years.length > 0 ? results.years : '--'}</span> years
+              <span>{results.years.length > 0 ? results.years : "--"}</span>{" "}
+              years
             </li>
             <li>
-              <span>{results.months.length > 0 ? results.months : '--'}</span> months
+              <span>{results.months.length > 0 ? results.months : "--"}</span>{" "}
+              months
             </li>
             <li>
-              <span>{results.days.length> 0 ? results.days : '--'}</span> days
+              <span>{results.days.length > 0 ? results.days : "--"}</span> days
             </li>
           </ul>
         </div>

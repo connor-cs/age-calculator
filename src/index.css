@@ -68,3 +68,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.input {
+  max-width: min-content
+}
+.input-section {
+  max-width: fit-content;
+}

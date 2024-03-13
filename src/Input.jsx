@@ -1,4 +1,5 @@
-const Input = ({ isValid, setInput, input, errors }) => {
+const Input = ({setInput, input, errors }) => {
+  console.log("Errors in Input component:", {errors});
   return (
     <div className="input-section">
       <div className="input">
@@ -34,11 +35,7 @@ const Input = ({ isValid, setInput, input, errors }) => {
         {errors.monthError ? <p>Must be a valid month</p> : null}
       </div>
       <div className="input">
-        <label
-          htmlFor="year"
-          className={errors.yearError ? "invalid" : null}
-          required
-        >
+        <label htmlFor="year" className={errors.yearError ? "invalid" : null}>
           YEAR
         </label>
         <input
