@@ -73,7 +73,7 @@ function App() {
       console.log("invalid year");
     }
 
-    if (
+    else if (
       isNaN(parseInt(input.month, 10)) ||
       parseInt(input.month, 10) > 12 ||
       parseInt(input.month, 10) < 1
@@ -83,7 +83,7 @@ function App() {
       console.log("invalid month");
     }
 
-    if (!(+input.day >= 1) || !(+input.day <= daysInMonth)) {
+    else if (!(+input.day >= 1) || !(+input.day <= daysInMonth)) {
       setIsValid(false);
       setErrors((prevErrors) => ({ ...prevErrors, dayError: true }));
       console.log("invalid day");

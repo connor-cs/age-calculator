@@ -1,5 +1,5 @@
 const Input = ({setInput, input, errors }) => {
-  console.log("Errors in Input component:", {errors});
+  
   return (
     <div className="input-section">
       <div className="input">

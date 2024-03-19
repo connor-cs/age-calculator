@@ -71,7 +71,7 @@ body {
   display: flex;
   flex-direction: column;
   text-align: left;
-  max-width: fit-content
+  max-width: 60%
 }
 
 
@@ -111,7 +111,7 @@ body {
 .input-section {
   display: flex;
   align-items: flex-start;
-  max-width: 60%
+  max-width: fit-content
 }
 
 li {
