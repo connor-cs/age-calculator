@@ -71,7 +71,7 @@ body {
   display: flex;
   flex-direction: column;
   text-align: left;
-  max-width: 60%
+  /* max-width: 60%; */
 }
 
 
@@ -87,8 +87,8 @@ body {
   border-radius: 5px;
   border: 1px solid hsl(0, 0%, 86%);
   margin: 1rem;
-  font-size: 32px;
-  max-width: 30%;
+  /* font-size: 32px; */
+  /* max-width: 30%; */
 }
 
 .input>input.invalid {
@@ -111,7 +111,7 @@ body {
 .input-section {
   display: flex;
   align-items: flex-start;
-  max-width: fit-content
+  max-width: fit-content;
 }
 
 li {
@@ -124,7 +124,7 @@ li {
   background-color: #ffff;
   padding: 30px;
   border-radius: 30px 30px 200px 30px;
-  max-width: 60%;
+  /* max-width: 60%; */
   margin: 0 auto;
 }
 
